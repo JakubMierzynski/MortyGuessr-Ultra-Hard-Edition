@@ -20,6 +20,14 @@ void goToLobby(BuildContext context) {
     //   pageBuilder: (context, animation, secondaryAnimation) => const LobbyScreen(),
     //   transitionDuration: Duration.zero,
     // ),
-    PageTransition(type: PageTransitionType.fade, child: LobbyScreen())
+    PageTransition(type: PageTransitionType.fade, child: LobbyScreen()),
   );
+}
+
+String normalize(String s) {
+  return s
+      .toLowerCase()
+      .trim()
+      .replaceAll(RegExp(r'\s+'), ' ')
+      .replaceAll(RegExp(r'[‘’]'), "'");
 }

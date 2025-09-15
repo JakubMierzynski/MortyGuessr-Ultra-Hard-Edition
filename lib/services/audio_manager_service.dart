@@ -10,7 +10,7 @@ class AudioManagerService {
   Future<void> init() async {
     await _player.setReleaseMode(ReleaseMode.loop);
     await _player.play(AssetSource('music/theme.mp3'),
-        volume: 0);
+        volume: 1);
   }
 
   void toggle() {

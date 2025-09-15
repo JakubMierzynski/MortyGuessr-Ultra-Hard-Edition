@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_event.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_state.dart';
 import 'package:morty_guessr/bloc/network_bloc/network_bloc.dart';
+import 'package:morty_guessr/constants/functions.dart';
 import 'package:morty_guessr/databases/Scores/scores_database.dart';
 import 'package:morty_guessr/models/character.dart';
 import 'package:morty_guessr/models/score.dart';
@@ -59,8 +60,10 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     });
 
     on<GuessCharacter>((event, emit) {
-      if (event.guess.toLowerCase() ==
-          state.currentCharacter.name.toLowerCase()) {
+      final guess = normalize(event.guess);
+      final answer = normalize(state.currentCharacter.name);
+
+      if (guess == answer) {
         if (state.currentScore < 999) {
           emit(state.copyWith(currentScore: state.currentScore + 1));
         }
@@ -124,7 +127,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             userGuess: "",
             hintShowed: false,
             resetInput: false,
-            showAnwser: false
+            showAnwser: false,
           ),
         );
         emit(state.copyWith(timer: state.timer - 5));
@@ -214,3 +217,4 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     });
   }
 }
+
