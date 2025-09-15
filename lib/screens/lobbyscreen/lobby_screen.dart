@@ -9,6 +9,7 @@ import 'package:morty_guessr/constants/styles.dart';
 import 'package:morty_guessr/screens/gamescreen/game_screen.dart';
 import 'package:morty_guessr/screens/leaderboard/leaderboard_screen.dart';
 import 'package:morty_guessr/services/check_internet_connection.dart';
+import 'package:morty_guessr/widgets/loading_screen.dart';
 import 'package:morty_guessr/widgets/lobby_button_container_widget.dart';
 import 'package:morty_guessr/widgets/no_internet_widget.dart';
 import 'package:morty_guessr/widgets/shake_text.dart';
@@ -71,17 +72,24 @@ class _LobbyScreenState extends State<LobbyScreen>
                           child: TapDebouncer(
                             cooldown: const Duration(milliseconds: 2000),
                             onTap: () async {
-                              print("HIIII");
                               // alway check check if online before starting
                               final isOnline = await hasInternet();
 
                               if (isOnline) {
-                                gameBloc.add(StartGame());
+                                // gameBloc.add(StartGame());
+                                // Navigator.push(
+                                //   context,
+                                //   PageTransition(
+                                //     type: PageTransitionType.fade,
+                                //     child: const GameScreen(),
+                                //   ),
+                                // );
+
                                 Navigator.push(
                                   context,
                                   PageTransition(
                                     type: PageTransitionType.fade,
-                                    child: const GameScreen(),
+                                    child: const LoadingScreen(),
                                   ),
                                 );
                               } else {

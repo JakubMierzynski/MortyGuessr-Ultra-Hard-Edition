@@ -110,14 +110,6 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
             ),
           ),
         ),
-        // body: Container(
-        //   decoration: const BoxDecoration(
-        //     image: DecorationImage(
-        //       alignment: Alignment.center,
-        //       fit: BoxFit.cover,
-        //       image: AssetImage("assets/images/background2.png"),
-        //     ),
-        //   )
         body: Stack(
           children: [
             Positioned.fill(

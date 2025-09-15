@@ -71,6 +71,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/animations/
+    - assets/animations/rick.json
+    - assets/animations/Fire.json
+    - assets/animations/morty_dancing.json
     - assets/music/theme.mp3
     - assets/images/background.png
     - assets/images/background2.png

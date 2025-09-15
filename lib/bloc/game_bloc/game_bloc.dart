@@ -102,6 +102,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             userGuess: "",
             hintShowed: false,
             resetInput: false,
+            showAnwser: false,
           ),
         );
       } else {
@@ -123,6 +124,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             userGuess: "",
             hintShowed: false,
             resetInput: false,
+            showAnwser: false
           ),
         );
         emit(state.copyWith(timer: state.timer - 5));
