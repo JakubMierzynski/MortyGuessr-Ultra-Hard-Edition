@@ -4,19 +4,22 @@ import 'package:morty_guessr/bloc/game_bloc/game_bloc.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_event.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_state.dart';
 import 'package:morty_guessr/constants/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void showSettingsWidget(BuildContext context) {
+  final isSmallScreen = screenHeight(context) < 700;
+
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: Colors.black,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: fontColor, width: 2),
-          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(color: fontColor, width: 2.r),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         actionsAlignment: MainAxisAlignment.center,
-        title: Text(
+        title: const Text(
           "SETTINGS",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -27,7 +30,7 @@ void showSettingsWidget(BuildContext context) {
           ),
         ),
         content: SizedBox(
-          width: 250,
+          width: 250.r,
           child: BlocBuilder<GameBloc, GameState>(
             builder: (context, state) {
               final isVolumeOn = state.isMusicOn;
@@ -36,26 +39,30 @@ void showSettingsWidget(BuildContext context) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("SOUND",
-                      style: TextStyle(color: fontColor, fontSize: 25)),
-                  const SizedBox(height: 10),
+                  Text(
+                    "SOUND",
+                    style: TextStyle(color: fontColor, fontSize: 25.r),
+                  ),
+                  SizedBox(height: 10.r),
                   IconButton(
                     icon: Icon(
                       isVolumeOn ? Icons.volume_up : Icons.volume_off,
                       color: fontColor,
-                      size: 30,
+                      size: isSmallScreen ? 40.r : 30.r,
                     ),
                     onPressed: () {
                       gameBloc.add(ToggleMusic());
                     },
                   ),
-                  const SizedBox(height: 20),
-                  Text("TIMER",
-                      style: TextStyle(color: fontColor, fontSize: 25)),
+                  SizedBox(height: 20.r),
+                  Text(
+                    "TIMER",
+                    style: TextStyle(color: fontColor, fontSize: 25.r),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10.r),
                       TextButton(
                         onPressed: () {
                           gameBloc.add(ChangeInitialTimer(state.settingsTimer));
@@ -67,18 +74,18 @@ void showSettingsWidget(BuildContext context) {
                                 Icon(
                                   Icons.timer_outlined,
                                   color: fontColor,
-                                  size: 30,
+                                  size: isSmallScreen ? 40.r : 30.r,
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
+                                SizedBox(width: 20.r),
                                 Text(
                                   "${state.settingsTimer.toString()} s",
-                                  style:
-                                      TextStyle(color: fontColor, fontSize: 20),
-                                )
+                                  style: TextStyle(
+                                    color: fontColor,
+                                    fontSize: isSmallScreen ? 25.r : 20.r,
+                                  ),
+                                ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),

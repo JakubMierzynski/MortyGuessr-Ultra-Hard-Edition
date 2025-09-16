@@ -10,6 +10,8 @@ import 'package:morty_guessr/constants/loading_texts.dart';
 import 'package:morty_guessr/constants/styles.dart';
 import 'package:morty_guessr/screens/gamescreen/game_screen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -68,6 +70,8 @@ class _LoadingScreenState extends State<LoadingScreen>
 
   @override
   Widget build(BuildContext context) {
+        final isSmallScreen = screenHeight(context) < 700;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -80,61 +84,64 @@ class _LoadingScreenState extends State<LoadingScreen>
           AnimatedBackground(
             behaviour: RandomParticleBehaviour(options: particleOptions),
             vsync: this,
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Lottie.asset(
-                    (randomInt % 2 == 0)
-                        ? "assets/animations/rick.json"
-                        : "assets/animations/morty_dancing.json",
-                    width: 250,
-                    height: 250,
-                    fit: BoxFit.contain,
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    loadingText,
-                    style: TextStyle(color: fontColor, fontSize: 25),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 15),
-                  Container(
-                    width: 300,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.greenAccent, width: 2),
+            child: Padding(
+              padding: EdgeInsets.all(8.0.r),
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Lottie.asset(
+                      (randomInt % 2 == 0)
+                          ? "assets/animations/rick.json"
+                          : "assets/animations/morty_dancing.json",
+                      width: isSmallScreen ? 300.r : 250.r,
+                      height: isSmallScreen ? 300.r :  250.r,
+                      fit: BoxFit.contain,
                     ),
-                    child: AnimatedBuilder(
+                    SizedBox(height: 20.r),
+                    Text(
+                      loadingText,
+                      style: TextStyle(color: fontColor, fontSize: 25.r),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 15.r),
+                    Container(
+                      width: 300.r,
+                      height: 20.r,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.greenAccent, width: 2.r),
+                      ),
+                      child: AnimatedBuilder(
+                        animation: _progressController,
+                        builder: (context, child) {
+                          return FractionallySizedBox(
+                            widthFactor: _progressController.value,
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              decoration: const BoxDecoration(color: fontColor),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 10.r),
+                    AnimatedBuilder(
                       animation: _progressController,
                       builder: (context, child) {
-                        return FractionallySizedBox(
-                          widthFactor: _progressController.value,
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            decoration: BoxDecoration(color: fontColor),
+                        final percent = (_progressController.value * 100).ceil();
+                        return Text(
+                          "$percent%",
+                          style: TextStyle(
+                            color: fontColor,
+                            fontSize: isSmallScreen ? 25.r : 18.r,
+                            fontWeight: FontWeight.bold,
+                            shadows: [Shadow(color: fontColor, blurRadius: 4.r)],
                           ),
                         );
                       },
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  AnimatedBuilder(
-                    animation: _progressController,
-                    builder: (context, child) {
-                      final percent = (_progressController.value * 100).ceil();
-                      return Text(
-                        "$percent%",
-                        style: TextStyle(
-                          color: fontColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          shadows: [Shadow(color: fontColor, blurRadius: 4)],
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

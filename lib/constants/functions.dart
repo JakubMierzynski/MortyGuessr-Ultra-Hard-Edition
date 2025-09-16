@@ -20,7 +20,7 @@ void goToLobby(BuildContext context) {
     //   pageBuilder: (context, animation, secondaryAnimation) => const LobbyScreen(),
     //   transitionDuration: Duration.zero,
     // ),
-    PageTransition(type: PageTransitionType.fade, child: LobbyScreen()),
+    PageTransition(type: PageTransitionType.fade, child: const LobbyScreen()),
   );
 }
 

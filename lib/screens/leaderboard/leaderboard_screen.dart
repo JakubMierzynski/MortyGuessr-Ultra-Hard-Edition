@@ -7,6 +7,7 @@ import 'package:morty_guessr/constants/functions.dart';
 import 'package:morty_guessr/databases/Scores/scores_database.dart';
 import 'package:morty_guessr/widgets/circle_container.dart';
 import 'package:morty_guessr/widgets/shake_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({super.key});
@@ -22,6 +23,7 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
   @override
   Widget build(BuildContext context) {
     final fetchScores = ScoreDatabase.instance.fetchScores();
+    final isSmallScreen = screenHeight(context) < 700;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -30,7 +32,7 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
         title: Text(
           "TOP SCORES",
           style: TextStyle(
-            fontSize: 40,
+            fontSize: 40.r,
             color: fontColor,
             fontWeight: FontWeight.w900,
           ),
@@ -47,13 +49,13 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
           ),
 
           AnimatedBackground(
-            behaviour: RandomParticleBehaviour(
-              options: particleOptions
-            ),
+            behaviour: RandomParticleBehaviour(options: particleOptions),
             vsync: this,
 
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 70),
+              padding: isSmallScreen
+                  ? EdgeInsets.fromLTRB(40.r, 20.r, 40.r, 40.r)
+                  : EdgeInsets.fromLTRB(40.r, 20.r, 40.r, 70.r),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -70,23 +72,24 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                             snapshot.data!.isEmpty) {
                           return Column(
                             children: [
-                              SizedBox(height: 150),
-                              Image(
+                              SizedBox(height: 150.r),
+                              const Image(
                                 image: AssetImage(
                                   "assets/images/try_leader_neon.png",
                                 ),
+                                fit: BoxFit.contain,
                               ),
-                              SizedBox(height: 50),
+                              SizedBox(height: 50.r),
                               Text(
                                 "No scores yet!",
                                 style: TextStyle(
                                   color: fontColor,
-                                  fontSize: 30,
+                                  fontSize: 30.r,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(height: 100),
+                              SizedBox(height: isSmallScreen ? 30.r : 100.r),
                             ],
                           );
                         } else {
@@ -108,9 +111,7 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                                 final score = snapshotScores[index];
 
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 20.0,
-                                  ),
+                                  padding: EdgeInsets.symmetric(vertical: 20.r),
                                   child: (index + 1 == 1)
                                       ? SizedBox(
                                           child: Stack(
@@ -120,18 +121,19 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                                                 decoration: BoxDecoration(
                                                   boxShadow: [boxShadow],
                                                   border: Border.all(
-                                                    width: 2,
+                                                    width: 2.r,
                                                     color: fontColor,
                                                   ),
                                                   borderRadius:
-                                                      BorderRadius.circular(8),
+                                                      BorderRadius.circular(
+                                                        8.r,
+                                                      ),
                                                 ),
                                                 child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                        horizontal: 20,
-                                                        vertical: 8,
-                                                      ),
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 20.r,
+                                                    vertical: 8.r,
+                                                  ),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -144,19 +146,21 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                                                           FaIcon(
                                                             FontAwesomeIcons
                                                                 .trophy,
-                                                            color: Color(
+                                                            color: const Color(
                                                               0xFFFFD700,
                                                             ),
-                                                            size: 35,
+                                                            size: 35.r,
                                                           ),
-                                                          SizedBox(width: 6),
+                                                          SizedBox(width: 6.r),
                                                           SizedBox(
                                                             child: LottieBuilder.asset(
                                                               frameRate:
-                                                                  FrameRate(8),
+                                                                  const FrameRate(
+                                                                    8,
+                                                                  ),
                                                               "assets/animations/Fire.json",
-                                                              height: 45,
-                                                              width: 45,
+                                                              height: 45.r,
+                                                              width: 45.r,
                                                             ),
                                                           ),
                                                         ],
@@ -164,8 +168,8 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                                                       ShakeText(
                                                         text: score.points
                                                             .toString(),
-                                                        style: const TextStyle(
-                                                          fontSize: 50,
+                                                        style: TextStyle(
+                                                          fontSize: 50.r,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color: Colors.white,
@@ -177,14 +181,16 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                                                 ),
                                               ),
                                               Positioned(
-                                                top:
-                                                    -40, // dostosuj pozycję w pionie
-                                                right:
-                                                    -25, // dostosuj pozycję w poziomie
+                                                top: -40
+                                                    .r, // dostosuj pozycję w pionie
+                                                right: -25
+                                                    .r, // dostosuj pozycję w poziomie
                                                 child: Image.asset(
                                                   'assets/images/morty_icon.png',
-                                                  width: 80, // szerokość obrazu
-                                                  height: 80, // wysokość obrazu
+                                                  width:
+                                                      80.r, // szerokość obrazu
+                                                  height:
+                                                      80.r, // wysokość obrazu
                                                 ),
                                               ),
                                             ],
@@ -193,23 +199,24 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                                       : Column(
                                           children: [
                                             SizedBox(
-                                              width: 210,
+                                              width: isSmallScreen? 250.r : 210.r,
                                               child: DecoratedBox(
                                                 decoration: BoxDecoration(
                                                   boxShadow: [boxShadow],
                                                   border: Border.all(
-                                                    width: 2,
+                                                    width: 2.r,
                                                     color: fontColor,
                                                   ),
                                                   borderRadius:
-                                                      BorderRadius.circular(8),
+                                                      BorderRadius.circular(
+                                                        8.r,
+                                                      ),
                                                 ),
                                                 child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                        horizontal: 20,
-                                                        vertical: 8,
-                                                      ),
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 20.r,
+                                                    vertical: 8.r,
+                                                  ),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -222,8 +229,8 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                                                       ),
                                                       Text(
                                                         score.points.toString(),
-                                                        style: const TextStyle(
-                                                          fontSize: 40,
+                                                        style: TextStyle(
+                                                          fontSize: 40.r,
                                                           color: Colors.white,
                                                         ),
                                                       ),
@@ -242,18 +249,18 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                       },
                     ),
                     SizedBox(
-                      width: 150,
+                      width: 150.r,
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           boxShadow: [boxShadow],
-                          border: Border.all(width: 2, color: fontColor),
-                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(width: 2.r, color: fontColor),
+                          borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: IconButton(
                           onPressed: () {
                             goToLobby(context);
                           },
-                          icon: Icon(Icons.home, color: fontColor, size: 30),
+                          icon: Icon(Icons.home, color: fontColor, size: 30.r),
                         ),
                       ),
                     ),

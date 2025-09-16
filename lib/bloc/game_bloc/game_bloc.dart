@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_event.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_state.dart';
@@ -31,7 +30,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           hintShowed: false,
           timer: 60,
           settingsTimer: 60,
-          currentScore: 20,
+          currentScore: 0,
           isMusicOn: true,
           resetInput: false,
           wrongAnswerTrigger: 0,
@@ -164,7 +163,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           userGuess: null,
           hintShowed: false,
           timer: state.settingsTimer,
-          currentScore: state.currentScore + 1,
+          currentScore: 0,
           resetInput: false,
           wrongAnswerTrigger: 0,
           showAnwser: false,
@@ -184,19 +183,14 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     });
 
     on<ShowEndgameModal>((event, emit) async {
-      print("SHOW ENDGAME MODAL");
-
       emit(state.copyWith(showEndgameModal: true));
     });
 
     on<ShowNoInternetEndgameModal>((event, emit) async {
-      print("SHOW NO INTERNET ENDGAME MODAL");
-
       emit(state.copyWith(showNoInternetEndgameModal: true));
     });
 
     on<ChangeInitialTimer>((event, emit) async {
-      print(event.settingsTimer);
       switch (event.settingsTimer) {
         case 30:
           {

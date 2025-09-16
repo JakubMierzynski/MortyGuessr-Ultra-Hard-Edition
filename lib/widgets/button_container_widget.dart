@@ -8,6 +8,7 @@ import 'package:morty_guessr/bloc/network_bloc/network_event.dart';
 import 'package:morty_guessr/bloc/network_bloc/network_state.dart';
 import 'package:morty_guessr/constants/styles.dart';
 import 'package:tap_debouncer/tap_debouncer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ButtonContainerWidget extends StatelessWidget {
   final icon;
@@ -33,6 +34,8 @@ class ButtonContainerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSmallScreen = screenHeight(context) < 700;
+
     if (gameEvent != null && networkEvent != null) {
       // CAN'T PUT BOTH AT SAME TIME
       return const SizedBox.shrink();
@@ -41,16 +44,26 @@ class ButtonContainerWidget extends StatelessWidget {
       return BlocBuilder<GameBloc, GameState>(
         builder: (context, state) {
           return Container(
-            height: (height != null) ? height : 55,
-            width: (width != null) ? width : 50,
+            height: (height != null)
+                ? height
+                : isSmallScreen
+                ? 68.r
+                : 55.r,
+            width: (width != null)
+                ? width
+                : isSmallScreen
+                ? 68.r
+                : 55.r,
             decoration: BoxDecoration(
               boxShadow: [boxShadow],
               border: Border.all(
                 color: fontColor, // kolor obwódki
-                width: 2,
+                width: 2.r,
               ),
 
-              borderRadius: BorderRadius.circular(8), // lekko zaokrąglone rogi
+              borderRadius: BorderRadius.circular(
+                8.r,
+              ), // lekko zaokrąglone rogi
             ),
             child: Center(
               child: TapDebouncer(
@@ -68,7 +81,7 @@ class ButtonContainerWidget extends StatelessWidget {
                           onPressed: onTap,
                           child: Text(
                             buttonText.toString(),
-                            style: TextStyle(color: fontColor, fontSize: 20),
+                            style: TextStyle(color: fontColor, fontSize: 20.r),
                           ),
                         );
                 },
@@ -82,16 +95,26 @@ class ButtonContainerWidget extends StatelessWidget {
       return BlocBuilder<NetworkBloc, NetworkState>(
         builder: (context, state) {
           return Container(
-            height: (height != null) ? height : 55,
-            width: (width != null) ? width : 50,
+            height: (height != null)
+                ? height
+                : isSmallScreen
+                ? 68.r
+                : 55.r,
+            width: (width != null)
+                ? width
+                : isSmallScreen
+                ? 68.r
+                : 55.r,
             decoration: BoxDecoration(
               boxShadow: [boxShadow],
               border: Border.all(
                 color: fontColor, // kolor obwódki
-                width: 2,
+                width: 2.r,
               ),
 
-              borderRadius: BorderRadius.circular(8), // lekko zaokrąglone rogi
+              borderRadius: BorderRadius.circular(
+                8.r,
+              ), // lekko zaokrąglone rogi
             ),
             child: Center(
               child: TapDebouncer(
@@ -109,7 +132,10 @@ class ButtonContainerWidget extends StatelessWidget {
                           onPressed: onTap,
                           child: Text(
                             buttonText.toString(),
-                            style: TextStyle(color: fontColor, fontSize: 20),
+                            style: TextStyle(
+                              color: fontColor,
+                              fontSize: isSmallScreen ? 25.r : 20.r,
+                            ),
                           ),
                         );
                 },
@@ -121,16 +147,21 @@ class ButtonContainerWidget extends StatelessWidget {
     } else {
       //Beware that button without event && function parameter will do () {}
       return Container(
-        height: (height != null) ? height : 55,
-        width: (width != null) ? width : 50,
+        height: (height != null)
+            ? height
+            : isSmallScreen
+            ? 68.r
+            : 55.r,
+        width: (width != null)
+            ? width
+            : isSmallScreen
+            ? 68.r
+            : 55.r,
         decoration: BoxDecoration(
           boxShadow: [boxShadow],
-          border: Border.all(
-            color: fontColor, // kolor obwódki
-            width: 2,
-          ),
+          border: Border.all(color: fontColor, width: 2.r),
 
-          borderRadius: BorderRadius.circular(8), // lekko zaokrąglone rogi
+          borderRadius: BorderRadius.circular(8.r), // lekko zaokrąglone rogi
         ),
         child: Center(
           child: TapDebouncer(
@@ -147,7 +178,7 @@ class ButtonContainerWidget extends StatelessWidget {
                       onPressed: onTap,
                       child: Text(
                         buttonText.toString(),
-                        style: TextStyle(color: fontColor, fontSize: 20),
+                        style: TextStyle(color: fontColor, fontSize: 20.r),
                       ),
                     );
             },

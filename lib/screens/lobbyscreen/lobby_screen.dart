@@ -1,12 +1,9 @@
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:morty_guessr/bloc/game_bloc/game_bloc.dart';
-import 'package:morty_guessr/bloc/game_bloc/game_event.dart';
 import 'package:morty_guessr/bloc/network_bloc/network_bloc.dart';
 import 'package:morty_guessr/bloc/network_bloc/network_state.dart';
 import 'package:morty_guessr/constants/styles.dart';
-import 'package:morty_guessr/screens/gamescreen/game_screen.dart';
 import 'package:morty_guessr/screens/leaderboard/leaderboard_screen.dart';
 import 'package:morty_guessr/services/check_internet_connection.dart';
 import 'package:morty_guessr/widgets/loading_screen.dart';
@@ -17,6 +14,7 @@ import 'package:morty_guessr/widgets/show_info_widget.dart';
 import 'package:morty_guessr/widgets/show_settings_widget.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tap_debouncer/tap_debouncer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LobbyScreen extends StatefulWidget {
   const LobbyScreen({super.key});
@@ -31,8 +29,6 @@ class _LobbyScreenState extends State<LobbyScreen>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    final gameBloc = context.read<GameBloc>();
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
@@ -60,12 +56,12 @@ class _LobbyScreenState extends State<LobbyScreen>
                         fit: BoxFit.contain,
                       ),
                       Container(
-                        height: 100,
-                        width: 250,
+                        height: 100.r,
+                        width: 250.r,
                         decoration: BoxDecoration(
                           color: Colors.black,
-                          border: Border.all(color: fontColor, width: 3),
-                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: fontColor, width: 3.r),
+                          borderRadius: BorderRadius.circular(16.r),
                           boxShadow: [boxShadow],
                         ),
                         child: Center(
@@ -76,15 +72,6 @@ class _LobbyScreenState extends State<LobbyScreen>
                               final isOnline = await hasInternet();
 
                               if (isOnline) {
-                                // gameBloc.add(StartGame());
-                                // Navigator.push(
-                                //   context,
-                                //   PageTransition(
-                                //     type: PageTransitionType.fade,
-                                //     child: const GameScreen(),
-                                //   ),
-                                // );
-
                                 Navigator.push(
                                   context,
                                   PageTransition(
@@ -104,7 +91,7 @@ class _LobbyScreenState extends State<LobbyScreen>
                                       .textTheme
                                       .bodyLarge!
                                       .copyWith(
-                                        fontSize: 25,
+                                        fontSize: 25.r,
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
@@ -115,12 +102,12 @@ class _LobbyScreenState extends State<LobbyScreen>
                           ),
                         ),
                       ),
-                      SizedBox(height: 45),
-                      LobbyButtonContainerWidget(
+                      SizedBox(height: 45.r),
+                      const LobbyButtonContainerWidget(
                         buttonText: "LEADERBOARD",
                         toPage: LeaderboardScreen(),
                       ),
-                      SizedBox(height: 45),
+                      SizedBox(height: 45.r),
                       LobbyButtonContainerWidget(
                         buttonText: "SETTINGS",
                         dialogFunc: () {
@@ -128,11 +115,11 @@ class _LobbyScreenState extends State<LobbyScreen>
                         },
                         delay: 0,
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 30.r),
                       LobbyButtonContainerWidget(
                         buttonText: "?",
-                        width: 60,
-                        height: 60,
+                        width: 60.r,
+                        height: 60.r,
                         delay: 0,
                         dialogFunc: () {
                           showInfoCenteredModal(context);

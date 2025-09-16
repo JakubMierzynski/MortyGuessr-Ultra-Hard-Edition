@@ -6,6 +6,8 @@ import 'package:morty_guessr/constants/styles.dart';
 import 'package:morty_guessr/widgets/shake_text.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tap_debouncer/tap_debouncer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class LobbyButtonContainerWidget extends StatelessWidget {
   final GameEvent? event;
@@ -32,15 +34,15 @@ class LobbyButtonContainerWidget extends StatelessWidget {
     final gameBloc = context.read<GameBloc>();
 
     return Container(
-      height: (height != null) ? height : 100,
-      width: (width != null) ? width : 250,
+      height: (height != null) ? height : 100.r,
+      width: (width != null) ? width : 250.r,
       decoration: BoxDecoration(
         color: Colors.black, // czarne wypełnienie
         border: Border.all(
           color: fontColor, // zielony neonowy border
-          width: 3,
+          width: 3.r,
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [boxShadow],
       ),
       child: Center(
@@ -57,12 +59,11 @@ class LobbyButtonContainerWidget extends StatelessWidget {
               Navigator.push(
                 context,
                 PageTransition(type: PageTransitionType.fade, child: toPage!),
-                // MaterialPageRoute(builder: (_) => toPage!),
               );
             } else if (dialogFunc != null) {
               dialogFunc!();
             } else {
-              SizedBox.shrink();
+              const SizedBox.shrink();
               // Does nothing. Need dialogFunc or toPage parameter
             }
           },
@@ -71,7 +72,7 @@ class LobbyButtonContainerWidget extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: fontColor,
                 textStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontSize: 25,
+                  fontSize: 25.r,
                   fontWeight: FontWeight.bold,
                 ),
               ),

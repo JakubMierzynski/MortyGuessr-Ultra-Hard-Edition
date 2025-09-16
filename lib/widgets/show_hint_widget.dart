@@ -3,32 +3,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_bloc.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_state.dart';
 import 'package:morty_guessr/constants/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void showHintCenteredModal(BuildContext context) {
+  final isSmallScreen = screenHeight(context) < 700;
+
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: Colors.black,
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: fontColor,
-            width: 2,
-          ),
-          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(color: fontColor, width: 2.r),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         actionsAlignment: MainAxisAlignment.center,
-        title: Text(
+        title: const Text(
           "HINTS",
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline,
-              decorationColor: fontColor,
-              color: fontColor),
+            fontWeight: FontWeight.bold,
+            decoration: TextDecoration.underline,
+            decorationColor: fontColor,
+            color: fontColor,
+          ),
         ),
         content: SizedBox(
-          width: 250,
+          width: 250.r,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -38,69 +39,55 @@ void showHintCenteredModal(BuildContext context) {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: isSmallScreen ? 20.r : 16.r,
                   color: fontColor,
                 ),
               ),
-              SizedBox(
-                height: 5,
-              ),
+              SizedBox(height: 5.r),
               BlocBuilder<GameBloc, GameState>(
                 builder: (context, state) {
                   return Text(
                     state.currentCharacter.location,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: fontColor,
-                    ),
+                    style: const TextStyle(color: fontColor),
                   );
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10.r),
               Text(
                 "Status",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: fontColor),
+                  fontWeight: FontWeight.bold,
+                  fontSize: isSmallScreen ? 20.r : 16.r,
+                  color: fontColor,
+                ),
               ),
-              SizedBox(
-                height: 5,
-              ),
+              SizedBox(height: 5.r),
               BlocBuilder<GameBloc, GameState>(
                 builder: (context, state) {
                   return Text(
                     state.currentCharacter.status,
-                    style: TextStyle(
-                      color: fontColor,
-                    ),
+                    style: const TextStyle(color: fontColor),
                   );
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10.r),
               Text(
                 "Species",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: fontColor),
+                  fontWeight: FontWeight.bold,
+                  fontSize: isSmallScreen ? 20.r : 16.r,
+                  color: fontColor,
+                ),
               ),
-              SizedBox(
-                height: 5,
-              ),
+              SizedBox(height: 5.r),
               BlocBuilder<GameBloc, GameState>(
                 builder: (context, state) {
                   return Text(
                     state.currentCharacter.species,
-                    style: TextStyle(
-                      color: fontColor,
-                    ),
+                    style: const TextStyle(color: fontColor),
                   );
                 },
               ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:morty_guessr/constants/styles.dart';
 
 class CircleContainer extends StatelessWidget {
   final int index;
@@ -6,46 +8,45 @@ class CircleContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSmallScreen = screenHeight(context) < 700;
+
     return Container(
       alignment: Alignment.center,
-      height: 50,
-      width: 50,
+      height: isSmallScreen ? 65.r : 50.r,
+      width: isSmallScreen ? 65.r : 50.r,
       decoration: BoxDecoration(
         color: Colors.black,
-        border: Border.all(
-          color: Colors.black, // kolor obwódki
-          width: 2,
-        ),
-        borderRadius: BorderRadius.circular(50),
+        border: Border.all(color: Colors.black, width: 2.r),
+        borderRadius: BorderRadius.circular(50.r),
       ),
       child: (index == 1)
           ? SizedBox(
-              width: 60,
-              height: 60,
-              child: Image(
+              width: isSmallScreen ? 70.r : 50.r,
+              height: isSmallScreen ? 70.r : 50.r,
+              child: const Image(
                 image: AssetImage("assets/images/happy_face_neon.png"),
               ),
             )
           : (index == 2)
           ? SizedBox(
-              width: 60,
-              height: 60,
-              child: Image(
+              width: isSmallScreen ? 70.r : 50.r,
+              height: isSmallScreen ? 70.r : 50.r,
+              child: const Image(
                 image: AssetImage("assets/images/poker_face_neon.png"),
               ),
             )
           : (index == 3)
           ? SizedBox(
-              width: 60,
-              height: 60,
-              child: Image(
+              width: isSmallScreen ? 70.r : 50.r,
+              height: isSmallScreen ? 70.r : 50.r,
+              child: const Image(
                 image: AssetImage("assets/images/not_happy_face_neon.png"),
               ),
             )
           : SizedBox(
-              width: 60,
-              height: 60,
-              child: Image(
+              width: isSmallScreen ? 70.r : 50.r,
+              height: isSmallScreen ? 70.r : 50.r,
+              child: const Image(
                 image: AssetImage("assets/images/cry_face_neon.png"),
               ),
             ),

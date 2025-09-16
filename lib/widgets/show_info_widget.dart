@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:morty_guessr/constants/info.dart';
 import 'package:morty_guessr/constants/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void showInfoCenteredModal(BuildContext context) {
+
   showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
         backgroundColor: Colors.black,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: fontColor, width: 2),
-          borderRadius: BorderRadiusGeometry.circular(16),
+          side: BorderSide(color: fontColor, width: 2.r),
+          borderRadius: BorderRadiusGeometry.circular(16.r),
         ),
         actionsAlignment: MainAxisAlignment.center,
-        title: Text(
+        title: const Text(
           "INFO",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -25,8 +26,8 @@ void showInfoCenteredModal(BuildContext context) {
           ),
         ),
         content: SizedBox(
-          height: 300,
-          width: 250,
+          height: 300.r,
+          width: 250.r,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -40,7 +41,7 @@ void showInfoCenteredModal(BuildContext context) {
                       style: TextStyle(
                         color: fontColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 17,
+                        fontSize: 17.r,
                       ),
                       overflow: TextOverflow.fade,
                       softWrap: true,
@@ -48,7 +49,7 @@ void showInfoCenteredModal(BuildContext context) {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 20.r),
                 Text.rich(
                   overflow: TextOverflow.fade,
                   softWrap: true,
@@ -57,13 +58,13 @@ void showInfoCenteredModal(BuildContext context) {
                     children: [
                       TextSpan(
                         text: infoText,
-                        style: TextStyle(color: fontColor, fontSize: 17),
+                        style: TextStyle(color: fontColor, fontSize: 17.r),
                       ),
                       TextSpan(
                         text: """SCORING SYSTEM""",
                         style: TextStyle(
                           color: fontColor,
-                          fontSize: 20,
+                          fontSize: 20.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -71,7 +72,7 @@ void showInfoCenteredModal(BuildContext context) {
                         text: "\n---",
                         style: TextStyle(
                           color: fontColor,
-                          fontSize: 17,
+                          fontSize: 17.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -79,19 +80,19 @@ void showInfoCenteredModal(BuildContext context) {
                         text: "\nCORRECT ANSWER\n",
                         style: TextStyle(
                           color: fontColor,
-                          fontSize: 17,
+                          fontSize: 17.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextSpan(
                         text: "+1 point & +30 seconds",
-                        style: TextStyle(color: fontColor, fontSize: 17),
+                        style: TextStyle(color: fontColor, fontSize: 17.r),
                       ),
                       TextSpan(
                         text: "\n---",
                         style: TextStyle(
                           color: fontColor,
-                          fontSize: 17,
+                          fontSize: 17.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -99,19 +100,19 @@ void showInfoCenteredModal(BuildContext context) {
                         text: "\nSKIP\n",
                         style: TextStyle(
                           color: fontColor,
-                          fontSize: 17,
+                          fontSize: 17.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextSpan(
                         text: "-3 seconds",
-                        style: TextStyle(color: fontColor, fontSize: 17),
+                        style: TextStyle(color: fontColor, fontSize: 17.r),
                       ),
                       TextSpan(
                         text: "\n---",
                         style: TextStyle(
                           color: fontColor,
-                          fontSize: 17,
+                          fontSize: 17.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -119,23 +120,23 @@ void showInfoCenteredModal(BuildContext context) {
                         text: "\nHINT\n",
                         style: TextStyle(
                           color: fontColor,
-                          fontSize: 17,
+                          fontSize: 17.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextSpan(
                         text: "Free",
-                        style: TextStyle(color: fontColor, fontSize: 17),
+                        style: TextStyle(color: fontColor, fontSize: 17.r),
                       ),
                       TextSpan(
                         text: "\n(but barely helpful)",
-                        style: TextStyle(color: fontColor, fontSize: 17),
+                        style: TextStyle(color: fontColor, fontSize: 17.r),
                       ),
                       TextSpan(
                         text: "\n---",
                         style: TextStyle(
                           color: fontColor,
-                          fontSize: 17,
+                          fontSize: 17.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -144,7 +145,7 @@ void showInfoCenteredModal(BuildContext context) {
                             "\n\nChallenge your friends and share your best scores!",
                         style: TextStyle(
                           color: fontColor,
-                          fontSize: 17,
+                          fontSize: 17.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

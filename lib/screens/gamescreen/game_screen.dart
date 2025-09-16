@@ -12,6 +12,7 @@ import 'package:morty_guessr/widgets/no_internet_endgame_moda.dart';
 import 'package:morty_guessr/widgets/show_endgame_widget.dart';
 import 'package:morty_guessr/widgets/show_hint_widget.dart';
 import 'package:morty_guessr/widgets/timer_bar_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -26,6 +27,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final gameBloc = context.read<GameBloc>();
+    final isSmallScreen = screenHeight(context) < 700;
 
     return BlocListener<GameBloc, GameState>(
       listenWhen: (previous, current) =>
@@ -51,7 +53,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
 
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent, // transparentne tło
+          backgroundColor: Colors.transparent,
           elevation: 0,
           title: Container(
             color: Colors.transparent,
@@ -67,7 +69,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                           gameBloc.add(EndGame());
                         });
                       },
-                      icon: Icon(Icons.home, color: fontColor),
+                      icon: const Icon(Icons.home, color: fontColor),
                     );
                   },
                 ),
@@ -76,7 +78,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                     Text(
                       "MortyGuessr",
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: isSmallScreen ? 30.r : 25.r,
                         fontWeight: FontWeight.w900,
                         color: fontColor,
                       ),
@@ -84,7 +86,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                     Text(
                       "(ULTRA HARD EDITION)",
                       style: TextStyle(
-                        fontSize: 19,
+                        fontSize: isSmallScreen ? 24.r : 19.r,
                         fontWeight: FontWeight.normal,
                         color: fontColor,
                       ),
@@ -126,10 +128,10 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                   final character = state.currentCharacter;
 
                   return Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 25),
+                    padding: EdgeInsets.fromLTRB(20.r, 20.r, 20.r, 25.r),
                     child: Column(
                       children: [
-                        SizedBox(height: 110),
+                        SizedBox(height: 110.r),
                         Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -138,15 +140,15 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    width: 50,
-                                    height: 200,
+                                    width: 50.r,
+                                    height: 200.r,
                                     child: Column(
                                       children: [
                                         Text(
                                           "SCORE",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontSize: 13,
+                                            fontSize: 13.r,
                                             color: fontColor,
                                           ),
                                         ),
@@ -154,7 +156,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                                           "${state.currentScore}",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontSize: 40,
+                                            fontSize: 40.r,
                                             color: fontColor,
                                           ),
                                           softWrap: true,
@@ -174,11 +176,14 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                                                     color: Colors.black,
                                                   ),
                                                   borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  // boxShadow: [boxShadow],
+                                                      BorderRadius.circular(
+                                                        8.r,
+                                                      ),
                                                 ),
                                                 child: Image.asset(
                                                   "assets/images/poker_face_neon.png",
+                                                  width: 200.r,
+                                                  height: 200.r,
                                                 ),
                                               ),
                                             ],
@@ -192,15 +197,19 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                                                     color: fontColor,
                                                   ),
                                                   borderRadius:
-                                                      BorderRadius.circular(8),
+                                                      BorderRadius.circular(
+                                                        8.r,
+                                                      ),
                                                 ),
                                                 child: ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(8),
+                                                      BorderRadius.circular(
+                                                        8.r,
+                                                      ),
                                                   child: Image.network(
                                                     character.image,
-                                                    width: 200,
-                                                    height: 200,
+                                                    width: 200.r,
+                                                    height: 200.r,
                                                   ),
                                                 ),
                                               ),
@@ -208,15 +217,15 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                                           ),
                                   ),
                                   SizedBox(
-                                    width: 50,
-                                    height: 200,
+                                    width: 50.r,
+                                    height: 200.r,
                                     child: Column(
                                       children: [
                                         Text(
                                           "TIME",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontSize: 13,
+                                            fontSize: 13.r,
                                             color: fontColor,
                                           ),
                                         ),
@@ -232,17 +241,17 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                               ),
                               Column(
                                 children: [
-                                  const SizedBox(height: 10),
+                                  SizedBox(height: 10.r),
                                   BlocBuilder<GameBloc, GameState>(
                                     builder: (context, state) {
                                       return state.showAnwser == true
                                           ? SizedBox(
-                                              width: 450,
+                                              width: 450.r,
                                               child: Text(
                                                 character.name,
                                                 softWrap: true,
                                                 textAlign: TextAlign.center,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: fontColor,
                                                 ),
                                               ),
@@ -250,16 +259,16 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                                           : const SizedBox.shrink();
                                     },
                                   ),
-                                  const SizedBox(height: 10),
+                                  SizedBox(height: 10.r),
                                   Text(
                                     character.name,
-                                    style: TextStyle(color: fontColor),
+                                    style: const TextStyle(color: fontColor),
                                   ),
                                   Row(
                                     children: [
                                       ButtonContainerWidget(
                                         delay: 0,
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.lightbulb,
                                           color: fontColor,
                                         ),
@@ -268,13 +277,13 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                                           showHintCenteredModal(context);
                                         },
                                       ),
-                                      const SizedBox(width: 10),
+                                      SizedBox(width: 10.r),
                                       const Flexible(
                                         child: GuessInputWidget2(),
                                       ),
-                                      const SizedBox(width: 10),
+                                      SizedBox(width: 10.r),
                                       ButtonContainerWidget(
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.fast_forward,
                                           color: fontColor,
                                         ),
