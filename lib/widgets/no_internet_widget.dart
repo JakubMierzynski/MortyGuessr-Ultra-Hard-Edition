@@ -8,9 +8,9 @@ import 'package:morty_guessr/widgets/button_container_widget.dart';
 import 'package:morty_guessr/widgets/snack_no_internet.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void noInternetConnectionWidget(BuildContext context) {
+void noInternetConnectionWidget(BuildContext parentContext) {
   showDialog(
-    context: context,
+    context: parentContext,
     builder: (context) {
       return BlocBuilder<NetworkBloc, NetworkState>(
         builder: (context, state) {
@@ -18,7 +18,7 @@ void noInternetConnectionWidget(BuildContext context) {
             backgroundColor: Colors.black,
             shape: RoundedRectangleBorder(
               side: BorderSide(color: fontColor, width: 2.r),
-              borderRadius: BorderRadiusGeometry.circular(16),
+              borderRadius: BorderRadiusGeometry.circular(16.r),
             ),
             actionsAlignment: MainAxisAlignment.center,
             title: const Text(
@@ -43,7 +43,7 @@ void noInternetConnectionWidget(BuildContext context) {
                 height: 60.r,
                 delay: 2000,
                 actionFunction: () {
-                  noInternetSnackbar(context);
+                  noInternetSnackbar(parentContext);
                   Navigator.of(context).pop();
                 },
                 networkEvent: CheckNetwork(),

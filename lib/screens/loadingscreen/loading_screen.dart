@@ -9,9 +9,10 @@ import 'package:morty_guessr/bloc/game_bloc/game_event.dart';
 import 'package:morty_guessr/constants/loading_texts.dart';
 import 'package:morty_guessr/constants/styles.dart';
 import 'package:morty_guessr/screens/gamescreen/game_screen.dart';
+import 'package:morty_guessr/screens/lobbyscreen/lobby_screen.dart';
+import 'package:morty_guessr/services/check_internet_connection.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -55,11 +56,28 @@ class _LoadingScreenState extends State<LoadingScreen>
     await _progressController.forward().orCancel;
 
     if (!mounted) return;
-    // przejście do GameScreen
-    Navigator.pushReplacement(
-      context,
-      PageTransition(type: PageTransitionType.fade, child: const GameScreen()),
-    );
+    final isOnline = await hasInternet();
+
+    if (!mounted) return;
+
+    // if online -> GameScreen. else -> lobbyScreen
+    if (isOnline) {
+      Navigator.pushReplacement(
+        context,
+        PageTransition(
+          type: PageTransitionType.fade,
+          child: const GameScreen(),
+        ),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        PageTransition(
+          type: PageTransitionType.fade,
+          child: const LobbyScreen(),
+        ),
+      );
+    }
   }
 
   @override
@@ -70,7 +88,7 @@ class _LoadingScreenState extends State<LoadingScreen>
 
   @override
   Widget build(BuildContext context) {
-        final isSmallScreen = screenHeight(context) < 700;
+    final isSmallScreen = screenHeight(context) < 700;
 
     return Scaffold(
       body: Stack(
@@ -95,7 +113,7 @@ class _LoadingScreenState extends State<LoadingScreen>
                           ? "assets/animations/rick.json"
                           : "assets/animations/morty_dancing.json",
                       width: isSmallScreen ? 300.r : 250.r,
-                      height: isSmallScreen ? 300.r :  250.r,
+                      height: isSmallScreen ? 300.r : 250.r,
                       fit: BoxFit.contain,
                     ),
                     SizedBox(height: 20.r),
@@ -109,7 +127,10 @@ class _LoadingScreenState extends State<LoadingScreen>
                       width: 300.r,
                       height: 20.r,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.greenAccent, width: 2.r),
+                        border: Border.all(
+                          color: Colors.greenAccent,
+                          width: 2.r,
+                        ),
                       ),
                       child: AnimatedBuilder(
                         animation: _progressController,
@@ -128,14 +149,17 @@ class _LoadingScreenState extends State<LoadingScreen>
                     AnimatedBuilder(
                       animation: _progressController,
                       builder: (context, child) {
-                        final percent = (_progressController.value * 100).ceil();
+                        final percent = (_progressController.value * 100)
+                            .ceil();
                         return Text(
                           "$percent%",
                           style: TextStyle(
                             color: fontColor,
                             fontSize: isSmallScreen ? 25.r : 18.r,
                             fontWeight: FontWeight.bold,
-                            shadows: [Shadow(color: fontColor, blurRadius: 4.r)],
+                            shadows: [
+                              Shadow(color: fontColor, blurRadius: 4.r),
+                            ],
                           ),
                         );
                       },

@@ -6,7 +6,7 @@ import 'package:morty_guessr/bloc/network_bloc/network_state.dart';
 import 'package:morty_guessr/constants/styles.dart';
 import 'package:morty_guessr/screens/leaderboard/leaderboard_screen.dart';
 import 'package:morty_guessr/services/check_internet_connection.dart';
-import 'package:morty_guessr/widgets/loading_screen.dart';
+import 'package:morty_guessr/screens/loadingscreen/loading_screen.dart';
 import 'package:morty_guessr/widgets/lobby_button_container_widget.dart';
 import 'package:morty_guessr/widgets/no_internet_widget.dart';
 import 'package:morty_guessr/widgets/shake_text.dart';
