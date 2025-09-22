@@ -1,5 +1,6 @@
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:morty_guessr/bloc/network_bloc/network_bloc.dart';
 import 'package:morty_guessr/bloc/network_bloc/network_state.dart';
@@ -95,7 +96,8 @@ class _LobbyScreenState extends State<LobbyScreen>
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
-                                onPressed: onTap ?? () {},
+                                onPressed:
+                                onTap ?? () {},
                                 child: const ShakeText(text: "START GAME"),
                               );
                             },

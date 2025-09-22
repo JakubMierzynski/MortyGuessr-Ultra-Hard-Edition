@@ -105,7 +105,6 @@
 				8AEC4DCFAE2D19192EED94B0 /* Pods-RunnerTests.release.xcconfig */,
 				DADAF35964531231238F7949 /* Pods-RunnerTests.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -474,6 +473,8 @@
 				DEVELOPMENT_TEAM = S3C543ZXAV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MortyGuessr;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -657,6 +658,8 @@
 				DEVELOPMENT_TEAM = S3C543ZXAV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MortyGuessr;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -680,6 +683,8 @@
 				DEVELOPMENT_TEAM = S3C543ZXAV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MortyGuessr;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

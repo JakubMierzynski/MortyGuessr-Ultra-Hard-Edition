@@ -64,10 +64,10 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                   builder: (context, state) {
                     return IconButton(
                       onPressed: () {
-                        goToLobby(context);
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           gameBloc.add(EndGame());
                         });
+                        goToLobby(context);
                       },
                       icon: const Icon(Icons.home, color: fontColor),
                     );

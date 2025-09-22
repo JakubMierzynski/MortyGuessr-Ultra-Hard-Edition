@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_event.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_state.dart';
@@ -28,7 +29,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           ),
           userGuess: null,
           hintShowed: false,
-          timer: 60,
+          timer: 61,
           settingsTimer: 60,
           currentScore: 0,
           isMusicOn: true,
@@ -40,6 +41,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         ),
       ) {
     on<StartGame>((event, emit) async {
+      print("START GAME EVENT STRIKE");
       _timer?.cancel();
 
       final newCharacter = await FetchCharacterService().getRandomCharacter();
@@ -53,6 +55,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           timer: state.settingsTimer,
         ),
       );
+
       _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         add(TickTimer());
       });
@@ -70,6 +73,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         add(ResetInputWidget());
         emit(state.copyWith(resetInput: true, timer: state.timer + 25));
       } else {
+        HapticFeedback.mediumImpact();
         emit(
           state.copyWith(
             resetInput: false,
@@ -142,37 +146,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       emit(state.copyWith(isMusicOn: newIsMusicOn));
     });
 
-    on<EndGame>((event, emit) async {
-      final savedScore = state.currentScore;
-
-      _timer?.cancel();
-      if (savedScore != 0) {
-        add(AddScoreToLeaderboard(savedScore, DateTime.now()));
-      }
-
-      emit(
-        state.copyWith(
-          currentCharacter: Character(
-            id: 0,
-            name: "null",
-            status: "null",
-            location: "null",
-            species: "null",
-            image: "null",
-          ),
-          userGuess: null,
-          hintShowed: false,
-          timer: state.settingsTimer,
-          currentScore: 0,
-          resetInput: false,
-          wrongAnswerTrigger: 0,
-          showAnwser: false,
-          showEndgameModal: false,
-          showNoInternetEndgameModal: false,
-        ),
-      );
-    });
-
     on<ResetInputWidget>((event, emit) {
       emit(state.copyWith(resetInput: true));
     });
@@ -209,6 +182,37 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           }
       }
     });
+
+    on<EndGame>((event, emit) async {
+      print("ENDGAME EVENT STRIKE");
+      final savedScore = state.currentScore;
+
+      _timer?.cancel();
+      if (savedScore != 0) {
+        add(AddScoreToLeaderboard(savedScore, DateTime.now()));
+      }
+
+      emit(
+        state.copyWith(
+          currentCharacter: Character(
+            id: 0,
+            name: "null",
+            status: "null",
+            location: "null",
+            species: "null",
+            image: "null",
+          ),
+          userGuess: null,
+          hintShowed: false,
+          timer: state.settingsTimer,
+          currentScore: 0,
+          resetInput: false,
+          wrongAnswerTrigger: 0,
+          showAnwser: false,
+          showEndgameModal: false,
+          showNoInternetEndgameModal: false,
+        ),
+      );
+    });
   }
 }
-

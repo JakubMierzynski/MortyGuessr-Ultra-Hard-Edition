@@ -32,29 +32,18 @@ class _LoadingScreenState extends State<LoadingScreen>
     super.initState();
     _progressController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2), // czas ładowania paska
-    )..forward();
-  }
+      duration: const Duration(seconds: 2),
+    );
+    
+    _startLoading().then((_) {_goGameScreen();});
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    precacheImage(
-      const AssetImage("assets/images/poker_face_neon.png"),
-      context,
-    ).then((_) {
-      _startLoading();
-    });
-
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      if (mounted) context.read<GameBloc>().add(StartGame());
-    });
   }
 
   Future<void> _startLoading() async {
     await _progressController.forward().orCancel;
+  }
 
+  Future<void> _goGameScreen() async {
     if (!mounted) return;
     final isOnline = await hasInternet();
 
@@ -62,6 +51,9 @@ class _LoadingScreenState extends State<LoadingScreen>
 
     // if online -> GameScreen. else -> lobbyScreen
     if (isOnline) {
+      if (mounted) context.read<GameBloc>().add(StartGame());
+
+      await Future.delayed(const Duration(seconds: 1));
       Navigator.pushReplacement(
         context,
         PageTransition(

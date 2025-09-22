@@ -13,14 +13,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await ScoreDatabase.instance.clearScores();
 
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key});
 
   @override

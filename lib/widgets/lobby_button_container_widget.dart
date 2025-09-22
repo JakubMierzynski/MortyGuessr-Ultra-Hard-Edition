@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_bloc.dart';
 import 'package:morty_guessr/bloc/game_bloc/game_event.dart';
@@ -76,7 +77,10 @@ class LobbyButtonContainerWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onPressed: onTap,
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                onTap?.call();
+              },
               child: ShakeText(text: buttonText),
             );
           },
