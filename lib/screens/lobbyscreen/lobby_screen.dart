@@ -1,6 +1,5 @@
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:morty_guessr/bloc/network_bloc/network_bloc.dart';
 import 'package:morty_guessr/bloc/network_bloc/network_state.dart';
@@ -28,6 +27,39 @@ class LobbyScreen extends StatefulWidget {
 
 class _LobbyScreenState extends State<LobbyScreen>
     with TickerProviderStateMixin {
+  bool _imagesPrecached = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_imagesPrecached) {
+      precacheImage(
+        const AssetImage("assets/images/try_leader_neon.png"),
+        context,
+      );
+      precacheImage(
+        const AssetImage("assets/images/poker_face_neon.png"),
+        context,
+      );
+      precacheImage(
+        const AssetImage("assets/images/not_happy_face_neon.png"),
+        context,
+      );
+      precacheImage(const AssetImage("assets/images/morty_icon.png"), context);
+      precacheImage(
+        const AssetImage("assets/images/happy_face_neon.png"),
+        context,
+      );
+      precacheImage(
+        const AssetImage("assets/images/cry_face_neon.png"),
+        context,
+      );
+
+      _imagesPrecached = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,8 +128,7 @@ class _LobbyScreenState extends State<LobbyScreen>
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
-                                onPressed:
-                                onTap ?? () {},
+                                onPressed: onTap ?? () {},
                                 child: const ShakeText(text: "START GAME"),
                               );
                             },

@@ -28,7 +28,8 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black12,
+
         title: Text(
           "TOP SCORES",
           style: TextStyle(
@@ -43,7 +44,7 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
         children: [
           Positioned.fill(
             child: Image.asset(
-              "assets/images/background2.png",
+              "assets/images/background.png",
               fit: BoxFit.fitHeight,
             ),
           ),
@@ -199,7 +200,9 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
                                       : Column(
                                           children: [
                                             SizedBox(
-                                              width: isSmallScreen? 250.r : 210.r,
+                                              width: isSmallScreen
+                                                  ? 250.r
+                                                  : 210.r,
                                               child: DecoratedBox(
                                                 decoration: BoxDecoration(
                                                   boxShadow: [boxShadow],

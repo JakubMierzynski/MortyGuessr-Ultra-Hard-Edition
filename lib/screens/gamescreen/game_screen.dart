@@ -260,10 +260,11 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                                     },
                                   ),
                                   SizedBox(height: 10.r),
-                                  Text(
-                                    character.name,
-                                    style: const TextStyle(color: fontColor),
-                                  ),
+                                  // show name to debug easier
+                                  // Text(
+                                  //   character.name,
+                                  //   style: const TextStyle(color: fontColor),
+                                  // ),
                                   Row(
                                     children: [
                                       ButtonContainerWidget(

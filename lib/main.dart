@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(393, 852),
         minTextAdapt: true,
         builder: (context, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'MortyGuessr',
           theme: ThemeData(
             textTheme: GoogleFonts.silkscreenTextTheme(),

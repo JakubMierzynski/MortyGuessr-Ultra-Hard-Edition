@@ -41,7 +41,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         ),
       ) {
     on<StartGame>((event, emit) async {
-      print("START GAME EVENT STRIKE");
       _timer?.cancel();
 
       final newCharacter = await FetchCharacterService().getRandomCharacter();
@@ -184,7 +183,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     });
 
     on<EndGame>((event, emit) async {
-      print("ENDGAME EVENT STRIKE");
       final savedScore = state.currentScore;
 
       _timer?.cancel();
