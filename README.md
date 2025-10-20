@@ -1,11 +1,12 @@
 MortyGuessr – Ultra hard guessing challenge! 🧠🚀
 
 Dive into the multiverse and test your memory and observational skills. Name characters from the chaotic interdimensional world in this fast-paced game.
-	•	🧩 Guess them all – Over 800 characters, from familiar faces to obscure extras.
-	•	🕹️ Retro vibes, future brain pain – The perfect mix of nostalgia and challenge.
-	•	💪 Git Gud – Beat your highs and climb the leaderboard.
-	•	🚫 No ads, pure chaos – Focus on fun, not interruptions.
-	•	🧠🔥 Daily brain workout – Keep your mind sharp while laughing at the madness.
+
+🧩 Guess them all – Over 800 characters, from familiar faces to obscure extras.
+🕹️ Retro vibes, future brain pain – The perfect mix of nostalgia and challenge.
+💪 Git Gud – Beat your highs and climb the leaderboard.
+🚫 No ads, pure chaos – Focus on fun, not interruptions.
+🧠🔥 Daily brain workout – Keep your mind sharp while laughing at the madness.
 
 Whether you’re a die-hard fan or just in for laughs, MortyGuessr will test your wits, speed, and memory.
 Can you guess them all? 🤔👽
