@@ -28,7 +28,7 @@ class _LeaderboardScreen extends State<LeaderboardScreen>
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.black12,
+        backgroundColor: Colors.transparent,
 
         title: Text(
           "TOP SCORES",

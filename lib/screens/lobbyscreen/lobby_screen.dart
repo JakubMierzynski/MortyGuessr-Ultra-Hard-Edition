@@ -113,7 +113,9 @@ class _LobbyScreenState extends State<LobbyScreen>
                                   ),
                                 );
                               } else {
-                                noInternetConnectionWidget(context);
+                                if (context.mounted) {
+                                  noInternetConnectionWidget(context);
+                                }
                               }
                             },
                             builder: (context, onTap) {

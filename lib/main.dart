@@ -6,14 +6,14 @@ import 'package:morty_guessr/bloc/game_bloc/game_bloc.dart';
 import 'package:morty_guessr/bloc/leaderboard_bloc/leaderboard_bloc.dart';
 import 'package:morty_guessr/bloc/network_bloc/network_bloc.dart';
 import 'package:morty_guessr/databases/Scores/scores_database.dart';
-import 'package:morty_guessr/screens/lobbyscreen/lobby_screen.dart';
+import 'package:morty_guessr/screens/welcomescreen/welcome_screen.dart';
 import 'package:morty_guessr/services/audio_manager_service.dart';
 import 'package:morty_guessr/services/fetch_character.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ScoreDatabase.instance.clearScores();
+  // await ScoreDatabase.instance.clearScores();
 
   runApp(const MyApp());
 }
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: const LobbyScreen(),
+          home: const WelcomeScreen(),
         ),
       ),
     );
